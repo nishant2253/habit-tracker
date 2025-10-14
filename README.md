@@ -4,6 +4,9 @@
 
 This project is a backend-only REST API for a personal habit tracker. It allows users to register, log in, create habits, track their progress, and manage streaks. The API is built with Node.js, Express, and MongoDB.
 
+The backend automatically connects to MongoDB when started.
+You can test the API via Postman and immediately visualize stored data in MongoDB Compass under the habit_tracker database.
+
 ## 2. Architecture Diagram
 
 ```
@@ -124,9 +127,14 @@ Client (Postman / Frontend)
 3.  **Set up `.env` file:**
     Create a `.env` file in the root directory with the following content:
     ```
-    MONGO_URI=mongodb://localhost:27017/habitdb
-    JWT_SECRET=your_jwt_secret
+    # Local MongoDB
+    MONGO_URI=mongodb://127.0.0.1:27017/habit_tracker
+
+    # or for MongoDB Atlas
+    # MONGO_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/habit_tracker
+
     PORT=5000
+    JWT_SECRET=your_jwt_secret
     ```
 
 4.  **Start the development server:**
@@ -157,3 +165,91 @@ npm test
 - **Jest**: Testing framework.
 - **Supertest**: For testing HTTP assertions.
 - **TypeScript**: Superset of JavaScript that adds static typing.
+
+## 🧩 Viewing Data in MongoDB Compass
+
+Once your backend is running and data has been created (for example, after registering users or creating habits), you can visualize your data using MongoDB Compass.
+
+### 🧭 Step-by-Step Guide
+**1️⃣ Open MongoDB Compass**
+
+Launch MongoDB Compass. You should see an interface like this:
+```
+Connections
+ ├── cluster0.xxxxx.mongodb.net
+ ├── clusterproofchain.xxxxx.mongodb.net
+ └── localhost:27017
+```
+
+**2️⃣ Connect to Your Local Database**
+
+If using local MongoDB, click on the connection:
+`localhost:27017`
+
+Or if using MongoDB Atlas, click on your cluster connection (e.g. cluster0.xxxxxx.mongodb.net) and log in with your credentials.
+
+**3️⃣ Access Your Project Database**
+
+Once connected:
+
+- Find your database named `habit_tracker` (created automatically by Mongoose).
+- Click it to open collections.
+
+You should now see:
+- `users` — all registered user documents
+- `habits` — all user-created habits with fields like title, frequency, tags, streak info
+- `tracklogs` — each habit completion entry (per day)
+
+**4️⃣ Verify Data**
+
+You can open each collection to view JSON documents, inspect fields, and confirm that your API is writing data correctly.
+
+**5️⃣ Example Documents**
+
+**users collection**
+```json
+{
+  "_id": "6711f9a45f3bca32dc4ff3e2",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "$2b$10$hashedstring"
+}
+```
+
+**habits collection**
+```json
+{
+  "_id": "6711fab7ef8b8c1ac7b45622",
+  "user": "6711f9a45f3bca32dc4ff3e2",
+  "title": "Morning Run",
+  "description": "Run 3km daily",
+  "frequency": "daily",
+  "tags": ["health", "fitness"],
+  "reminderTime": "07:00",
+  "currentStreak": 3,
+  "longestStreak": 5
+}
+```
+
+**tracklogs collection**
+```json
+{
+  "_id": "6711fae8a4bba1c8c634c099",
+  "habit": "6711fab7ef8b8c1ac7b45622",
+  "date": "2025-10-14T00:00:00.000Z"
+}
+```
+
+**6️⃣ Switching Between Local and Atlas**
+
+To use MongoDB Atlas instead of local, update your `.env`:
+```
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/habit_tracker
+```
+
+Save and restart your server:
+```bash
+npm run dev
+```
+
+Now Compass will show data from your Atlas cluster.
