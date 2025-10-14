@@ -42,8 +42,8 @@ Client (Postman / Frontend)
 - **Body:**
   ```json
   {
-    "name": "John Doe",
-    "email": "john@example.com",
+    "name": "Himanshu Sharma",
+    "email": "himanshu@example.com",
     "password": "password123"
   }
   ```
@@ -59,7 +59,7 @@ Client (Postman / Frontend)
 - **Body:**
   ```json
   {
-    "email": "john@example.com",
+    "email": "himanshu@example.com",
     "password": "password123"
   }
   ```
@@ -137,12 +137,43 @@ Client (Postman / Frontend)
     JWT_SECRET=your_jwt_secret
     ```
 
-4.  **Start the development server:**
+4.  **Running the Server**
+
+    You can run the server in two modes:
+
+    **A) Development Mode**
+
+    This mode uses `nodemon` to automatically restart the server when you make changes to the code.
     ```bash
     npm run dev
     ```
 
-    The API will be accessible at `http://localhost:5000/api`.
+    **B) Production Mode**
+
+    This mode requires you to build the JavaScript files from the TypeScript source first.
+    ```bash
+    # 1. Build the project
+    npm run build
+
+    # 2. Start the server
+    npm start
+    ```
+
+    The API will be accessible at `http://localhost:5000`.
+
+5.  **Stopping the Server**
+
+    If you started the server in the foreground (using `npm run dev` or `npm start`), you can stop it by pressing `Ctrl+C` in the terminal.
+
+    If you started the server in the background, you can find the process using the port number and stop it.
+    ```bash
+    # Find the process ID (PID) using the port (e.g., 5000)
+    lsof -i :5000
+
+    # Stop the process using its PID
+    kill <PID>
+    ```
+
 
 ## 6. Testing
 
@@ -171,9 +202,11 @@ npm test
 Once your backend is running and data has been created (for example, after registering users or creating habits), you can visualize your data using MongoDB Compass.
 
 ### 🧭 Step-by-Step Guide
+
 **1️⃣ Open MongoDB Compass**
 
 Launch MongoDB Compass. You should see an interface like this:
+
 ```
 Connections
  ├── cluster0.xxxxx.mongodb.net
@@ -196,6 +229,7 @@ Once connected:
 - Click it to open collections.
 
 You should now see:
+
 - `users` — all registered user documents
 - `habits` — all user-created habits with fields like title, frequency, tags, streak info
 - `tracklogs` — each habit completion entry (per day)
@@ -207,6 +241,7 @@ You can open each collection to view JSON documents, inspect fields, and confirm
 **5️⃣ Example Documents**
 
 **users collection**
+
 ```json
 {
   "_id": "6711f9a45f3bca32dc4ff3e2",
@@ -217,6 +252,7 @@ You can open each collection to view JSON documents, inspect fields, and confirm
 ```
 
 **habits collection**
+
 ```json
 {
   "_id": "6711fab7ef8b8c1ac7b45622",
@@ -232,6 +268,7 @@ You can open each collection to view JSON documents, inspect fields, and confirm
 ```
 
 **tracklogs collection**
+
 ```json
 {
   "_id": "6711fae8a4bba1c8c634c099",
@@ -243,11 +280,13 @@ You can open each collection to view JSON documents, inspect fields, and confirm
 **6️⃣ Switching Between Local and Atlas**
 
 To use MongoDB Atlas instead of local, update your `.env`:
+
 ```
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/habit_tracker
 ```
 
 Save and restart your server:
+
 ```bash
 npm run dev
 ```
