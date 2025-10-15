@@ -90,26 +90,120 @@ Client (Postman / Frontend)
 
 - **Headers:** `Authorization: Bearer <token>`
 - **Query Params:** `tag`, `page`, `limit`
+- **Response:**
+  ```json
+  {
+    "habits": [
+      {
+        "_id": "6711fab7ef8b8c1ac7b45622",
+        "user": "6711f9a45f3bca32dc4ff3e2",
+        "title": "Morning Run",
+        "description": "Run 3km daily",
+        "frequency": "daily",
+        "tags": ["health", "fitness"],
+        "reminderTime": "07:00",
+        "currentStreak": 3,
+        "longestStreak": 5
+      }
+    ],
+    "totalPages": 1,
+    "currentPage": 1
+  }
+  ```
 
 **GET** `/api/habits/:id`
 
 - **Headers:** `Authorization: Bearer <token>`
+- **Response:**
+  ```json
+  {
+    "_id": "6711fab7ef8b8c1ac7b45622",
+    "user": "6711f9a45f3bca32dc4ff3e2",
+    "title": "Morning Run",
+    "description": "Run 3km daily",
+    "frequency": "daily",
+    "tags": ["health", "fitness"],
+    "reminderTime": "07:00",
+    "currentStreak": 3,
+    "longestStreak": 5
+  }
+  ```
 
 **PUT** `/api/habits/:id`
 
 - **Headers:** `Authorization: Bearer <token>`
+- **Body:**
+  ```json
+  {
+    "title": "Evening Run",
+    "description": "Run 5km daily",
+    "frequency": "daily",
+    "tags": ["health", "fitness", "cardio"],
+    "reminderTime": "18:00"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "_id": "6711fab7ef8b8c1ac7b45622",
+    "user": "6711f9a45f3bca32dc4ff3e2",
+    "title": "Evening Run",
+    "description": "Run 5km daily",
+    "frequency": "daily",
+    "tags": ["health", "fitness", "cardio"],
+    "reminderTime": "18:00",
+    "currentStreak": 3,
+    "longestStreak": 5
+  }
+  ```
 
 **DELETE** `/api/habits/:id`
 
 - **Headers:** `Authorization: Bearer <token>`
+- **Response:**
+  ```json
+  {
+    "message": "Habit deleted"
+  }
+  ```
 
 **POST** `/api/habits/:id/track`
 
 - **Headers:** `Authorization: Bearer <token>`
+- **Body:** (empty)
+- **Response:**
+  ```json
+  {
+    "_id": "6711fab7ef8b8c1ac7b45622",
+    "user": "6711f9a45f3bca32dc4ff3e2",
+    "title": "Morning Run",
+    "description": "Run 3km daily",
+    "frequency": "daily",
+    "tags": ["health", "fitness"],
+    "reminderTime": "07:00",
+    "currentStreak": 4,
+    "longestStreak": 5
+  }
+  ```
 
 **GET** `/api/habits/:id/history`
 
 - **Headers:** `Authorization: Bearer <token>`
+- **Response:**
+  ```json
+  [
+    {
+      "_id": "6711fae8a4bba1c8c634c099",
+      "habit": "6711fab7ef8b8c1ac7b45622",
+      "date": "2025-10-15T00:00:00.000Z"
+    },
+    {
+      "_id": "6711fae8a4bba1c8c634c098",
+      "habit": "6711fab7ef8b8c1ac7b45622",
+      "date": "2025-10-14T00:00:00.000Z"
+    }
+  ]
+  ```
 
 ## 5. How to Run Locally
 
