@@ -438,7 +438,7 @@ Once your backend is running and data has been created (for example, after regis
 
 ### Step-by-Step Guide
 
-**1️ Open MongoDB Compass**
+**1 Open MongoDB Compass**
 
 Launch MongoDB Compass. You should see an interface like this:
 
@@ -449,14 +449,14 @@ Connections
  └── localhost:27017
 ```
 
-**2️ Connect to Your Local Database**
+**2 Connect to Your Local Database**
 
 If using local MongoDB, click on the connection:
 `localhost:27017`
 
 Or if using MongoDB Atlas, click on your cluster connection (e.g. cluster0.xxxxxx.mongodb.net) and log in with your credentials.
 
-**3️ Access Your Project Database**
+**3 Access Your Project Database**
 
 Once connected:
 
@@ -469,11 +469,11 @@ You should now see:
 - `habits` — all user-created habits with fields like title, frequency, tags, streak info
 - `tracklogs` — each habit completion entry (per day)
 
-**4️ Verify Data**
+**4 Verify Data**
 
 You can open each collection to view JSON documents, inspect fields, and confirm that your API is writing data correctly.
 
-**5️ Example Documents**
+**5 Example Documents**
 
 **users collection**
 
@@ -512,7 +512,7 @@ You can open each collection to view JSON documents, inspect fields, and confirm
 }
 ```
 
-**66️ Switching Between Local and Atlas**
+**6 Switching Between Local and Atlas**
 
 To use MongoDB Atlas instead of local, update your `.env`:
 
