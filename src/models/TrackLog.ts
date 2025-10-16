@@ -12,4 +12,6 @@ const TrackLogSchema = new mongoose.Schema({
   },
 });
 
+TrackLogSchema.index({ habit: 1, date: 1 }, { unique: true });
+
 export default mongoose.model('TrackLog', TrackLogSchema);

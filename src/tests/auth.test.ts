@@ -4,8 +4,8 @@ import app from '../server';
 describe('Auth Routes', () => {
   it('should register a new user', async () => {
     const res = await request(app).post('/api/register').send({
-      name: 'Test User',
-      email: 'test@example.com',
+      name: 'Test User 2',
+      email: 'test2@example.com',
       password: 'password123',
     });
     expect(res.statusCode).toEqual(201);
@@ -28,11 +28,6 @@ describe('Auth Routes', () => {
   });
 
   it('should login an existing user', async () => {
-    await request(app).post('/api/register').send({
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'password123',
-    });
     const res = await request(app).post('/api/login').send({
       email: 'test@example.com',
       password: 'password123',
